@@ -1,0 +1,7 @@
+name: Knative base environment
+
+modules:
+  activate:
+  - workshop-overview
+  - exercises/01-knative-tutorial
+  - workshop-summary

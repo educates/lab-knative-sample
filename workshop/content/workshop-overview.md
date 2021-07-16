@@ -1,0 +1,5 @@
+[Knative](https://knative.dev/) is an open source community project which adds components for deploying, running, and managing serverless, cloud-native applications to Kubernetes. The serverless cloud computing model can lead to increased developer productivity and reduced operational costs.
+
+Knative eliminates the tasks of provisioning and managing servers. This lets developers focus on their code without having to worry about setting up complex infrastructure. 
+
+The goal of this workshop is to serve as a base for content creators that want to show the capabilities of Knative and need a basic environment for doing so. Hence, workshop creators should only need to include their content, without worrying about dependencies. The workshop itself comes with an example of how to deploy a basic service, based on Knative's Serving getting started [guide](https://knative.dev/docs/getting-started/first-service/).

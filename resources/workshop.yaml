@@ -1,0 +1,25 @@
+apiVersion: training.eduk8s.io/v1alpha2
+kind: Workshop
+metadata:
+  name: knative-tutorial
+spec:
+  title: Tutorial for using Knative 
+  description: Test for using Knative with educates
+  url: https://github.com/educates/educates-knative
+  content:
+    image: projects.registry.vmware.com/educates/educates-knative
+  session:
+    namespaces:
+      budget: small
+    applications:
+      terminal:
+        enabled: true
+        layout: split
+      console:
+        enabled: true
+      editor:
+        enabled: true
+      docker:
+        enabled: true
+      registry:
+        enabled: true

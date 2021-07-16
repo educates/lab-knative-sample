@@ -1,0 +1,19 @@
+apiVersion: training.eduk8s.io/v1alpha1
+kind: TrainingPortal
+metadata:
+  name: knative-tutorial
+spec:
+  portal:
+    ingress:
+      hostname: knative-tutorial
+    password: mateogo42
+    registration:
+      type: anonymous
+    updates:
+      workshop: true
+  workshops:
+  - name: knative-tutorial
+    capacity: 3
+    reserved: 0
+    expires: 1h
+    orphaned: 10m
