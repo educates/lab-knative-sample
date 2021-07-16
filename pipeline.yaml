@@ -1,0 +1,64 @@
+resources:
+- name: source-code
+  type: git
+  icon: gitlab
+  source:
+    uri: https://github.com/educates/educates-knative.git
+    branch: master
+
+- name: harbor-registry
+  type: registry-image
+  icon: docker
+  source:
+    repository: projects.registry.vmware.com/educates/educates-knative
+    username: ((credentials/harbor.username))
+    password: ((credentials/harbor.password))
+
+jobs:
+  - name: build-image
+    plan:
+      - get: source-code
+        trigger: true
+      - task: create-version 
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: harbor-repo.vmware.com/dockerhub-proxy-cache/library/alpine 
+          inputs:
+          - name: source-code
+          outputs:
+          - name: versioning
+          run:
+            path: sh
+            dir: source-code
+            args:
+            - -exec
+            - |
+              apk update
+              apk add git
+              GITHUB_SHA=$( git log -1 --pretty=format:"%H" )
+              date "+%y%m%d.%H%M%S.${GITHUB_SHA:0:7}" > ../versioning/myversion
+
+      - task: build
+        privileged: true
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            icon: docker
+            source:
+              repository: harbor-repo.vmware.com/dockerhub-proxy-cache/vito/oci-build-task 
+          inputs:
+            - name: source-code
+          outputs:
+            - name: image
+          params:
+            CONTEXT: source-code
+          run:
+            path: build
+      - put: harbor-registry
+        params:
+          image: image/image.tar
+          additional_tags: versioning/myversion 
