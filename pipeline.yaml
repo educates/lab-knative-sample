@@ -4,7 +4,7 @@ resources:
   icon: gitlab
   source:
     uri: https://github.com/educates/educates-knative.git
-    branch: master
+    branch: main
 
 - name: harbor-registry
   type: registry-image
