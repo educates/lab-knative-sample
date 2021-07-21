@@ -3,14 +3,14 @@ resources:
   type: git
   icon: gitlab
   source:
-    uri: https://github.com/educates/educates-knative.git
+    uri: https://github.com/educates/lab-knative-sample.git
     branch: main
 
 - name: harbor-registry
   type: registry-image
   icon: docker
   source:
-    repository: projects.registry.vmware.com/educates/educates-knative
+    repository: projects.registry.vmware.com/educates/lab-knative-sample
     username: ((credentials/harbor.username))
     password: ((credentials/harbor.password))
 
